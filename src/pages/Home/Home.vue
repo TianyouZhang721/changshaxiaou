@@ -7,7 +7,7 @@
             <router-link to="/home/index"
                          tag="div">
                 <i class="iconfont icon-shouye"></i>
-                <p>首页</p>
+                <p>首页1</p>
             </router-link>
             <router-link to="/home/cart"
                          tag="div">
