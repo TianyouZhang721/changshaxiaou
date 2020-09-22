@@ -4,8 +4,11 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import "./utils/fontSize"
-import "./style/base.styl"  
+// import "./style/base.styl"  
 import "./style/font/iconfont.css"
+import "swiper/css/swiper.css"
+import http from './http'
+Vue.prototype.$http = http
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

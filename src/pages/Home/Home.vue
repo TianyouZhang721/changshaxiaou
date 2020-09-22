@@ -7,7 +7,7 @@
             <router-link to="/home/index"
                          tag="div">
                 <i class="iconfont icon-shouye"></i>
-                <p>首页1</p>
+                <p>首页</p>
             </router-link>
             <router-link to="/home/cart"
                          tag="div">
@@ -30,6 +30,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+
 .home
     width 100%
     height 100%
@@ -37,6 +38,7 @@ export default {
     flex-direction column
     main
         flex 1
+        overflow auto
     footer
         height 1rem
         display flex 
@@ -44,7 +46,7 @@ export default {
             flex 1
             text-align center
             &.router-link-active 
-                color orange
+                color color
             i 
                 font-size .4rem
 </style>
