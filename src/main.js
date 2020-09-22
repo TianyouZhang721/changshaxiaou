@@ -8,6 +8,11 @@ import "./utils/fontSize"
 import "./style/font/iconfont.css"
 import "swiper/css/swiper.css"
 import http from './http'
+import Vant from 'vant';
+import 'vant/lib/index.css';
+
+
+Vue.use(Vant);
 Vue.prototype.$http = http
 Vue.config.productionTip = false
 

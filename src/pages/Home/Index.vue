@@ -67,7 +67,7 @@
                 </div>
                 <div class="goods-list">
                     <ul>
-                        <li v-for="(item, index) in cateGoodsList" :key="item.id">
+                        <li @click="jump(item.id)" v-for="(item, index) in cateGoodsList" :key="item.id">
                             <div class="img-box">
                                 <img :src="'http://localhost:3000' + item.img"
                                      alt="">
@@ -140,6 +140,9 @@ export default {
     //     $route
     // },
     methods: {
+        jump(id) {
+            this.$router.push("/detail?id=" + id)
+        },
         getCateGoodsList() {
             this.$http.get("/getgoods", {fid: this.id}).then(res => {
                 console.log(res)
