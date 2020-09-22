@@ -41,12 +41,13 @@
             <!-- 点击tab切换 -->
             <div class="tab-box">
                 <span 
-                :class="{active: index == 0}"
+                :class="{active: index == ind}"
+                @click="change(index)"
                 v-for="(item, index) in navList" 
                 :key="index">{{ item }}</span>
             </div>
             <!-- 数据列表 -->
-            <GoodsList :goodsList="goodsList" />
+            <GoodsList v-if="goodsList.length > 0" :goodsList="goodsList[ind].content" />
         </div>
     </div>
 </template>
@@ -60,6 +61,7 @@
         },
         data() {
             return {
+                ind: 0,
                 navList: ["最热商品", "最新商品", "全部商品"],
                 bannerList: [],
                 goodsList: []
@@ -82,10 +84,14 @@
             })           
         },
         methods: {
+            change(i) {
+                // 1. 高亮切换 2. 数据切换
+                this.ind = i
+            },
             getGoodsList() {
                 this.$http.get("/getindexgoods").then(res => {
                     console.log(res)
-                    this.goodsList = res.data.list[0].content
+                    this.goodsList = res.data.list
                 })
             },
             goCategory() {
