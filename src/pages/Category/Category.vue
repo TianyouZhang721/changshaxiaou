@@ -19,7 +19,9 @@
             </div>
             <div class="second-cate">
                 <ul v-if="firstCateList.length > 0">
-                    <li v-for="(item, index) in firstCateList[ind].children" :key="item.id">
+                    <li
+                    @click="jump(item.id)"
+                     v-for="(item, index) in firstCateList[ind].children" :key="item.id">
                         <div class="img-box">
                         <img :src="'http://localhost:3000' + item.img" alt="">
 
@@ -53,6 +55,9 @@
             changeCate(i) {
                 // 1. 高亮切花 2. 右侧数据切换
                 this.ind = i
+            },
+            jump(id) {
+                this.$router.push("/home/index?id=" + id)
             }
         }
     }
