@@ -17,9 +17,9 @@
                 <div class="count-box">
                     <p>购买数量</p>
                     <div>
-                        <button>-</button>
+                        <button @click="jian">-</button>
                         <span>{{ count }}</span>
-                        <button>+</button>
+                        <button @click="jia">+</button>
                     </div>
                 </div>
                 <div class="specs-box">
@@ -31,7 +31,7 @@
             </div>
         </main>
         <footer>
-            <div class="cart">
+            <div class="cart" @click="goCart">
                 <i class="iconfont icon-gouwuche"></i>
                 <p>购物车</p>
             </div>
@@ -60,6 +60,18 @@ import { Toast } from 'vant';
             })
         },
         methods: {
+            goCart() {
+                this.$router.push("/home/cart")
+            },
+            jian() {
+                if (this.count == 1) {
+                    return
+                }
+                this.count--
+            },
+            jia() {
+                this.count++
+            },
             changeSpec() {
                 this.flag = !this.flag
             },
@@ -69,9 +81,30 @@ import { Toast } from 'vant';
                     Toast.fail('请选择一个规格');
                     return
                 }
-                // 判断登录状态
+                // 判断登录状态,获取vuex中的user，如果user中有nickname则代表已经登录
+                if (!this.user.nickname) {
+                    Toast.fail('请登录,将在2秒之后自动跳到登录页');
+                    setTimeout(() => {
+                        this.$router.push("/login")
+                    }, 2000)
+                    return
+                }
+
+                // 通过两层验证，调用添加购物车接口
+                this.$http.post("/cartadd",{
+                    uid: this.user.uid,
+                    goodsid: this.$route.query.id,
+                    num: this.count
+                }).then(res => {
+                    console.log(res)
+                })
             }
         },
+        computed: {
+            user() {
+                return this.$store.state.user
+            }
+        }
     }
 </script>
 
